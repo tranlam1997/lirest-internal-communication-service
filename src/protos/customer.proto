@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+service CustomerService {
+  rpc getUserById(Payload) return (User) {}
+}
+
+message Payload {
+  string id = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string firstname = 4;
+  string lastname = 5;
+  string dateOfBirth = 6;
+  string phoneNumber = 7;
+}
