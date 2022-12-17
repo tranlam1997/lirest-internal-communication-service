@@ -1,34 +1,19 @@
 import grpc from '@grpc/grpc-js';
 import { ServiceClient } from '@grpc/grpc-js/build/src/make-client';
-import protoLoader, { Options } from '@grpc/proto-loader';
-import { ServiceName } from './interfaces/service.interface';
-
-const PROTO_PATH = __dirname + '/protos/';
 
 export class Client {
   private client: ServiceClient;
-  private service: grpc.ServiceClientConstructor;
+  private serviceClient: grpc.ServiceClientConstructor;
 
   constructor({
-    protoLoaderOptions,
-    serviceName,
     host,
+    service,
   }: {
-    protoLoaderOptions: Options;
-    serviceName: ServiceName;
     host: string;
+    service: grpc.ServiceClientConstructor;
   }) {
-    const packageDefinition = protoLoader.loadSync(
-      PROTO_PATH + `${serviceName}.proto`,
-      protoLoaderOptions,
-    );
-    const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-    this.service = protoDescriptor[serviceName] as grpc.ServiceClientConstructor;
-    this.client = new this.service(host, grpc.credentials.createInsecure());
-  }
-
-  public getService() {
-    return this.service;
+    this.serviceClient = service;
+    this.client = new this.serviceClient(host, grpc.credentials.createInsecure());
   }
 
   public getClient() {

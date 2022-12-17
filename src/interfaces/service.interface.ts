@@ -1,1 +1,1 @@
-export type ServiceName = 'customer' | 'email';
+export type ServiceName = 'user' | 'auth';

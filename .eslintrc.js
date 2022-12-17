@@ -3,6 +3,7 @@ module.exports = {
     parserOptions: {
       project: 'tsconfig.json',
       sourceType: 'module',
+      extraFileExtensions: ['.json'],
     },
     plugins: ['@typescript-eslint/eslint-plugin'],
     extends: [
@@ -15,6 +16,7 @@ module.exports = {
       node: true,
       jest: true,
     },
+    ignorePatterns: ['*.js'],
     rules: {
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',

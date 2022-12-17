@@ -1,0 +1,9 @@
+version: v1
+plugins:
+  - remote: buf.build/stephenh/plugins/ts-proto
+    out: ../src/proto
+    opt:
+      - esModuleInterop=true
+      - env=node
+      - lowerCaseServiceMethods=true
+      - outputServices=grpc-js

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package services.user.v1;
+
+service UsersService {
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {}
+  rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
+}
+
+message UserEmail {
+  string email = 1;
+}
+
+message UserEntity {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string date_of_birth = 4;
+  string phone_number = 5;
+  string email = 6;
+  string username = 7;
+  string password = 8;
+  bool email_verified = 9;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+message GetUserByEmailResponse {
+  UserEntity user = 1;
+}
+
+message GetUserByIdRequest {
+  string id = 1;
+}
+
+message GetUserByIdResponse {
+  UserEntity user = 1;
+}
+
+message UserId {
+  string id = 1;
+}
