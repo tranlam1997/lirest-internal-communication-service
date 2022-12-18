@@ -1,10 +1,10 @@
-.husky/
-
 .vscode/
 
-node_modules/
+.github/
 
-./proto/
+node_modules
+
+proto/
 
 src/
 

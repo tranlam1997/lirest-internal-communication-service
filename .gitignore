@@ -4,8 +4,6 @@ tsconfig.tsbuildinfo
 # ignore all logs
 *.log
 
-.husky
-
 .vscode
 
 config.txt
