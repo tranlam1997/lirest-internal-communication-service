@@ -7,7 +7,7 @@
   "scripts": {
     "build:proto": "sh ./scripts/build-proto.sh",
     "build": "tsc -p tsconfig.build.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "repository": {
     "type": "git",
