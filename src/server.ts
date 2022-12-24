@@ -17,8 +17,12 @@ export class GrpcServer {
   }
 
   public bindAsync() {
-    this.server.bindAsync(this.host, grpc.ServerCredentials.createInsecure(), () => {
-      logger.info(`Server running at ${this.host} `);
+    this.server.bindAsync(this.host, grpc.ServerCredentials.createInsecure(), (error: Error | null, port: number) => {
+      if (error) {
+        logger.error(error);
+        return;
+      }
+      logger.info(`Server running at ${this.host}: ${port} `);
       this.server.start();
     });
   }
