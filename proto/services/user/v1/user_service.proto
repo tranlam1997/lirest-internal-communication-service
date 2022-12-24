@@ -5,6 +5,7 @@ package services.user.v1;
 service UsersService {
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {}
   rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 }
 
 message UserEmail {
@@ -36,6 +37,15 @@ message GetUserByIdRequest {
 }
 
 message GetUserByIdResponse {
+  UserEntity user = 1;
+}
+
+message UpdateUserRequest {
+  UserId id = 1;
+  UserEntity user = 2;
+}
+
+message UpdateUserResponse {
   UserEntity user = 1;
 }
 

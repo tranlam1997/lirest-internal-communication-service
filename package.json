@@ -1,13 +1,13 @@
 {
   "name": "@tranlam1997/lirest-internal-communication-service",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
     "build:proto": "sh ./scripts/build-proto.sh",
     "prebuild": "rm -rf ./dist",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "pnpm run build:proto && tsc -p tsconfig.build.json",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "repository": {

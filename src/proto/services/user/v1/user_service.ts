@@ -47,6 +47,15 @@ export interface GetUserByIdResponse {
   user: UserEntity | undefined;
 }
 
+export interface UpdateUserRequest {
+  id: UserId | undefined;
+  user: UserEntity | undefined;
+}
+
+export interface UpdateUserResponse {
+  user: UserEntity | undefined;
+}
+
 export interface UserId {
   id: string;
 }
@@ -421,6 +430,115 @@ export const GetUserByIdResponse = {
   },
 };
 
+function createBaseUpdateUserRequest(): UpdateUserRequest {
+  return { id: undefined, user: undefined };
+}
+
+export const UpdateUserRequest = {
+  encode(message: UpdateUserRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== undefined) {
+      UserId.encode(message.id, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.user !== undefined) {
+      UserEntity.encode(message.user, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateUserRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = UserId.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.user = UserEntity.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateUserRequest {
+    return {
+      id: isSet(object.id) ? UserId.fromJSON(object.id) : undefined,
+      user: isSet(object.user) ? UserEntity.fromJSON(object.user) : undefined,
+    };
+  },
+
+  toJSON(message: UpdateUserRequest): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? UserId.toJSON(message.id) : undefined);
+    message.user !== undefined && (obj.user = message.user ? UserEntity.toJSON(message.user) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<UpdateUserRequest>, I>>(object: I): UpdateUserRequest {
+    const message = createBaseUpdateUserRequest();
+    message.id = (object.id !== undefined && object.id !== null) ? UserId.fromPartial(object.id) : undefined;
+    message.user = (object.user !== undefined && object.user !== null)
+      ? UserEntity.fromPartial(object.user)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdateUserResponse(): UpdateUserResponse {
+  return { user: undefined };
+}
+
+export const UpdateUserResponse = {
+  encode(message: UpdateUserResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.user !== undefined) {
+      UserEntity.encode(message.user, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UpdateUserResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateUserResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.user = UserEntity.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdateUserResponse {
+    return { user: isSet(object.user) ? UserEntity.fromJSON(object.user) : undefined };
+  },
+
+  toJSON(message: UpdateUserResponse): unknown {
+    const obj: any = {};
+    message.user !== undefined && (obj.user = message.user ? UserEntity.toJSON(message.user) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<UpdateUserResponse>, I>>(object: I): UpdateUserResponse {
+    const message = createBaseUpdateUserResponse();
+    message.user = (object.user !== undefined && object.user !== null)
+      ? UserEntity.fromPartial(object.user)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseUserId(): UserId {
   return { id: "" };
 }
@@ -488,11 +606,21 @@ export const UsersServiceService = {
     responseSerialize: (value: GetUserByIdResponse) => Buffer.from(GetUserByIdResponse.encode(value).finish()),
     responseDeserialize: (value: Buffer) => GetUserByIdResponse.decode(value),
   },
+  updateUser: {
+    path: "/services.user.v1.UsersService/UpdateUser",
+    requestStream: false,
+    responseStream: false,
+    requestSerialize: (value: UpdateUserRequest) => Buffer.from(UpdateUserRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => UpdateUserRequest.decode(value),
+    responseSerialize: (value: UpdateUserResponse) => Buffer.from(UpdateUserResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => UpdateUserResponse.decode(value),
+  },
 } as const;
 
 export interface UsersServiceServer extends UntypedServiceImplementation {
   getUserByEmail: handleUnaryCall<GetUserByEmailRequest, GetUserByEmailResponse>;
   getUserById: handleUnaryCall<GetUserByIdRequest, GetUserByIdResponse>;
+  updateUser: handleUnaryCall<UpdateUserRequest, UpdateUserResponse>;
 }
 
 export interface UsersServiceClient extends Client {
@@ -525,6 +653,21 @@ export interface UsersServiceClient extends Client {
     metadata: Metadata,
     options: Partial<CallOptions>,
     callback: (error: ServiceError | null, response: GetUserByIdResponse) => void,
+  ): ClientUnaryCall;
+  updateUser(
+    request: UpdateUserRequest,
+    callback: (error: ServiceError | null, response: UpdateUserResponse) => void,
+  ): ClientUnaryCall;
+  updateUser(
+    request: UpdateUserRequest,
+    metadata: Metadata,
+    callback: (error: ServiceError | null, response: UpdateUserResponse) => void,
+  ): ClientUnaryCall;
+  updateUser(
+    request: UpdateUserRequest,
+    metadata: Metadata,
+    options: Partial<CallOptions>,
+    callback: (error: ServiceError | null, response: UpdateUserResponse) => void,
   ): ClientUnaryCall;
 }
 
