@@ -38,6 +38,8 @@ jobs:
         with:
           version: 7
       - uses: bufbuild/buf-setup-action@v1.11.0
+        with:
+          github_token: ${{ github.token }}
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Build

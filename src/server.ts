@@ -7,12 +7,18 @@ export class GrpcServer {
   private server: grpc.Server;
   private host: string;
 
-  constructor(host: string) {
-    this.server = new grpc.Server();
+  constructor({
+    host,
+    channelOptions = {},
+  }: {
+    host: string;
+    channelOptions?: grpc.ChannelOptions;
+  }) {
+    this.server = new grpc.Server(channelOptions);
     this.host = host;
   }
 
-  public addService(service: grpc.ServiceDefinition, methods: any) {
+  public addService(service: grpc.ServiceDefinition, methods: grpc.UntypedServiceImplementation) {
     this.server.addService(service, methods);
   }
 
