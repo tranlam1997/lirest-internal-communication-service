@@ -41,14 +41,10 @@ message GetUserByIdResponse {
 }
 
 message UpdateUserRequest {
-  UserId id = 1;
+  string id = 1;
   UserEntity user = 2;
 }
 
 message UpdateUserResponse {
   UserEntity user = 1;
-}
-
-message UserId {
-  string id = 1;
 }
