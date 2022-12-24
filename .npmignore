@@ -22,3 +22,4 @@ scripts/
 .prettierignore
 .prettierrc
 tsconfig.*
+.nvmrc

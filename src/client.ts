@@ -1,7 +1,7 @@
 import grpc from '@grpc/grpc-js';
 import { ServiceClient } from '@grpc/grpc-js/build/src/make-client';
 
-export class Client {
+export class GrpcClient {
   private client: ServiceClient;
   private serviceClient: grpc.ServiceClientConstructor;
 

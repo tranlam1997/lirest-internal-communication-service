@@ -3,15 +3,11 @@ import { Logger } from 'winston';
 
 const logger = new Logger({ level: 'info' });
 
-export class Server {
+export class GrpcServer {
   private server: grpc.Server;
   private host: string;
 
-  constructor({
-    host,
-  }: {
-    host: string;
-  }) {
+  constructor(host: string) {
     this.server = new grpc.Server();
     this.host = host;
   }
