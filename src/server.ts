@@ -1,7 +1,7 @@
 import { ChannelOptions, Server, ServerCredentials, ServiceDefinition, UntypedServiceImplementation } from '@grpc/grpc-js';
-import { Logger } from 'winston';
+import { logger } from './common/logger-config';
 
-const logger = new Logger({ level: 'info' });
+const ClientLogger = logger('GrpcServer');
 
 export class LirestGrpcServer {
   private server: Server;
@@ -25,10 +25,10 @@ export class LirestGrpcServer {
   public bindAsync() {
     this.server.bindAsync(this.host, ServerCredentials.createInsecure(), (error: Error | null, port: number) => {
       if (error) {
-        logger.error(error);
+        ClientLogger.error(error);
         return;
       }
-      logger.info(`Server running at ${this.host}: ${port} `);
+      ClientLogger.info(`Server running at ${this.host}: ${port} `);
       this.server.start();
     });
   }

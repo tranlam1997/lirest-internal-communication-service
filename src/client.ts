@@ -1,8 +1,8 @@
 import { ChannelOptions, credentials } from '@grpc/grpc-js';
-import { Logger } from 'winston';
 import { LirestServiceClient, LirestServiceClientConstructor } from './interfaces/grpc.interface';
+import { logger } from './common/logger-config';
 
-const logger = new Logger({ level: 'info' });
+const ClientLogger = logger('GrpcClient');
 
 export class LirestGrpcClient {
   private client: LirestServiceClient;
@@ -19,7 +19,7 @@ export class LirestGrpcClient {
   }) {
     this.serviceClient = service;
     this.client = new this.serviceClient(host, credentials.createInsecure(), channelOptions);
-    logger.info(`Client running at ${host}`);
+    ClientLogger.info(`Client running at ${host}`);
   }
 
   public getClient() {
