@@ -1,10 +1,10 @@
-import grpc from '@grpc/grpc-js';
+import { ChannelOptions, Server, ServerCredentials, ServiceDefinition, UntypedServiceImplementation } from '@grpc/grpc-js';
 import { Logger } from 'winston';
 
 const logger = new Logger({ level: 'info' });
 
-export class LirestGrpcServer {
-  private server: grpc.Server;
+export class Liresterver {
+  private server: Server;
   private host: string;
 
   constructor({
@@ -12,18 +12,18 @@ export class LirestGrpcServer {
     channelOptions = {},
   }: {
     host: string;
-    channelOptions?: grpc.ChannelOptions;
+    channelOptions?: ChannelOptions;
   }) {
-    this.server = new grpc.Server(channelOptions);
+    this.server = new Server(channelOptions);
     this.host = host;
   }
 
-  public addService(service: grpc.ServiceDefinition, methods: grpc.UntypedServiceImplementation) {
+  public addService(service: ServiceDefinition, methods: UntypedServiceImplementation) {
     this.server.addService(service, methods);
   }
 
   public bindAsync() {
-    this.server.bindAsync(this.host, grpc.ServerCredentials.createInsecure(), (error: Error | null, port: number) => {
+    this.server.bindAsync(this.host, ServerCredentials.createInsecure(), (error: Error | null, port: number) => {
       if (error) {
         logger.error(error);
         return;
