@@ -1,7 +1,9 @@
-import { ChannelCredentials, ChannelOptions, ServiceDefinition } from "@grpc/grpc-js";
-import { ServiceClient } from "@grpc/grpc-js/build/src/make-client";
+/* eslint-disable @typescript-eslint/ban-types */
+import { ChannelCredentials, ChannelOptions, Client, ServiceDefinition } from "@grpc/grpc-js";
 
-export type LirestServiceClient = ServiceClient;
+export type LirestServiceClient = Client & {
+  [methodName: string]: Function;
+};
 
 export interface LirestServiceClientConstructor {
   new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): LirestServiceClient;
