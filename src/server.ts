@@ -3,7 +3,7 @@ import { Logger } from 'winston';
 
 const logger = new Logger({ level: 'info' });
 
-export class GrpcServer {
+export class LirestGrpcServer {
   private server: grpc.Server;
   private host: string;
 
