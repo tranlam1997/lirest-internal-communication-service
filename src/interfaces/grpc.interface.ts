@@ -1,8 +1,11 @@
 import { ChannelCredentials, ChannelOptions, ServiceDefinition } from "@grpc/grpc-js";
-import { ServiceClient } from "@grpc/grpc-js/build/src/make-client";
+import { UsersServiceClient } from "./service.interface";
+
+type LirestServiceClient = UsersServiceClient
 
 export interface LirestServiceClientConstructor {
-  new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): ServiceClient;
+  new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): LirestServiceClient;
   service: ServiceDefinition;
   serviceName?: string;
 }
+
