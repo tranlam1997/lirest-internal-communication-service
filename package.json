@@ -1,6 +1,6 @@
 {
   "name": "@tranlam1997/lirest-internal-communication-service",
-  "version": "0.1.15",
+  "version": "0.2.0",
   "description": "",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.7.3",
-    "@grpc/proto-loader": "^0.7.3",
     "long": "^5.2.1",
     "protobufjs": "^7.1.2",
     "winston": "^3.8.2"

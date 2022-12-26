@@ -4,4 +4,4 @@ breaking:
     - WIRE_JSON
 lint:
   use:
-    - DEFAULT
+    - BASIC

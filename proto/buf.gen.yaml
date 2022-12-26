@@ -7,3 +7,4 @@ plugins:
       - env=node
       - lowerCaseServiceMethods=true
       - outputServices=grpc-js
+      - stringEnums=true

@@ -48,16 +48,12 @@ export interface GetUserByIdResponse {
 }
 
 export interface UpdateUserRequest {
-  id: UserId | undefined;
+  id: string;
   user: UserEntity | undefined;
 }
 
 export interface UpdateUserResponse {
   user: UserEntity | undefined;
-}
-
-export interface UserId {
-  id: string;
 }
 
 function createBaseUserEmail(): UserEmail {
@@ -431,13 +427,13 @@ export const GetUserByIdResponse = {
 };
 
 function createBaseUpdateUserRequest(): UpdateUserRequest {
-  return { id: undefined, user: undefined };
+  return { id: "", user: undefined };
 }
 
 export const UpdateUserRequest = {
   encode(message: UpdateUserRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== undefined) {
-      UserId.encode(message.id, writer.uint32(10).fork()).ldelim();
+    if (message.id !== "") {
+      writer.uint32(10).string(message.id);
     }
     if (message.user !== undefined) {
       UserEntity.encode(message.user, writer.uint32(18).fork()).ldelim();
@@ -453,7 +449,7 @@ export const UpdateUserRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = UserId.decode(reader, reader.uint32());
+          message.id = reader.string();
           break;
         case 2:
           message.user = UserEntity.decode(reader, reader.uint32());
@@ -468,21 +464,21 @@ export const UpdateUserRequest = {
 
   fromJSON(object: any): UpdateUserRequest {
     return {
-      id: isSet(object.id) ? UserId.fromJSON(object.id) : undefined,
+      id: isSet(object.id) ? String(object.id) : "",
       user: isSet(object.user) ? UserEntity.fromJSON(object.user) : undefined,
     };
   },
 
   toJSON(message: UpdateUserRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? UserId.toJSON(message.id) : undefined);
+    message.id !== undefined && (obj.id = message.id);
     message.user !== undefined && (obj.user = message.user ? UserEntity.toJSON(message.user) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<UpdateUserRequest>, I>>(object: I): UpdateUserRequest {
     const message = createBaseUpdateUserRequest();
-    message.id = (object.id !== undefined && object.id !== null) ? UserId.fromPartial(object.id) : undefined;
+    message.id = object.id ?? "";
     message.user = (object.user !== undefined && object.user !== null)
       ? UserEntity.fromPartial(object.user)
       : undefined;
@@ -535,53 +531,6 @@ export const UpdateUserResponse = {
     message.user = (object.user !== undefined && object.user !== null)
       ? UserEntity.fromPartial(object.user)
       : undefined;
-    return message;
-  },
-};
-
-function createBaseUserId(): UserId {
-  return { id: "" };
-}
-
-export const UserId = {
-  encode(message: UserId, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): UserId {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUserId();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.id = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): UserId {
-    return { id: isSet(object.id) ? String(object.id) : "" };
-  },
-
-  toJSON(message: UserId): unknown {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<UserId>, I>>(object: I): UserId {
-    const message = createBaseUserId();
-    message.id = object.id ?? "";
     return message;
   },
 };

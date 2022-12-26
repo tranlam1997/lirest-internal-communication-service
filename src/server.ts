@@ -1,5 +1,7 @@
 import { ChannelOptions, Server, ServerCredentials, ServiceDefinition, UntypedServiceImplementation } from '@grpc/grpc-js';
-import { logger } from './common/logger-config';
+import { logger } from './common/winston';
+import { HealthServiceService } from './proto/services/health/v1/health_service';
+import { HealthServer } from './health';
 
 const ClientLogger = logger('GrpcServer');
 
@@ -16,6 +18,7 @@ export class LirestGrpcServer {
   }) {
     this.server = new Server(channelOptions);
     this.host = host;
+    this.server.addService(HealthServiceService, new HealthServer())
   }
 
   public addService(service: ServiceDefinition, methods: UntypedServiceImplementation) {
