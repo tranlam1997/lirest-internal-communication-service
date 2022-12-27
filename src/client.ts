@@ -8,7 +8,6 @@ const ClientLogger = logger('GrpcClient');
 export class LirestGrpcClient {
   private client: LirestServiceClient;
   private serviceClient: LirestServiceClientConstructor;
-  private serviceName: keyof typeof ServiceNames;
 
   constructor({
     host,
@@ -21,15 +20,11 @@ export class LirestGrpcClient {
   }) {
     this.serviceClient = service;
     this.client = new this.serviceClient(host, credentials.createInsecure(), channelOptions);
-    this.serviceName = ServiceNames.find((serviceName) => serviceName === service.serviceName) as keyof typeof ServiceNames;
+    this.client.serviceName = ServiceNames.find((serviceName) => serviceName === service.serviceName);
     ClientLogger.info(`Client running at ${host}`);
   }
 
   public getClient() {
     return this.client;
-  }
-
-  public getServiceName() {
-    return this.serviceName;
   }
 }

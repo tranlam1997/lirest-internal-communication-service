@@ -2,7 +2,7 @@
 import { ChannelCredentials, ChannelOptions, ServiceDefinition } from "@grpc/grpc-js";
 import * as ServiceClient from "../proto";
 
-export type LirestServiceClient = ServiceClient.UsersServiceClient
+export type LirestServiceClient = (ServiceClient.UsersServiceClient | ServiceClient.HealthServiceClient ) & { serviceName: string };
 
 export interface LirestServiceClientConstructor {
   new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): LirestServiceClient;
