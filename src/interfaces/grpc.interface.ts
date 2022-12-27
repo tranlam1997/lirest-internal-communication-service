@@ -4,6 +4,6 @@ import { ChannelCredentials, ChannelOptions, Client, ServiceDefinition } from "@
 export interface LirestServiceClientConstructor<T extends Client = Client> {
   new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): T & { serviceName: string };
   service: ServiceDefinition;
-  serviceName: string;
+  serviceName?: string;
 }
 
