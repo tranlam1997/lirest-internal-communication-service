@@ -3,7 +3,7 @@ import glob from 'glob';
 export const ServiceVersions = {
   v1: 'v1',
 }
-const protoServices = glob.sync(('src/proto/services/*'), { ignore: ['**/index.ts'] });
+const protoServices = glob.sync(('dist/proto/services/*'), { ignore: ['**/index.ts'] });
 
 export const ServiceNames = protoServices.map((service) => {
   const serviceName = service.split('/').pop();
