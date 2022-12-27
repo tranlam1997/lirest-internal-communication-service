@@ -6,7 +6,7 @@ import { ServiceNames } from './enums/grpc.enum';
 const ClientLogger = logger('GrpcClient');
 
 export class LirestGrpcClient<T extends Client> {
-  private client: T & { serviceName: string };
+  private client: T & { serviceName?: string };
   private serviceClient: LirestServiceClientConstructor<T>;
 
   constructor({
