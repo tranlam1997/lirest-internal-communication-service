@@ -1,13 +1,13 @@
-import { ChannelOptions, credentials } from '@grpc/grpc-js';
-import { LirestServiceClient, LirestServiceClientConstructor } from './interfaces/grpc.interface';
+import { ChannelOptions, Client, credentials } from '@grpc/grpc-js';
+import { LirestServiceClientConstructor } from './interfaces/grpc.interface';
 import { logger } from './common/winston';
 import { ServiceNames } from './enums/grpc.enum';
 
 const ClientLogger = logger('GrpcClient');
 
-export class LirestGrpcClient {
-  private client: LirestServiceClient;
-  private serviceClient: LirestServiceClientConstructor;
+export class LirestGrpcClient<T extends Client> {
+  private client: T & { serviceName: string };
+  private serviceClient: LirestServiceClientConstructor<T>;
 
   constructor({
     host,
@@ -15,7 +15,7 @@ export class LirestGrpcClient {
     channelOptions = {},
   }: {
     host: string;
-    service: LirestServiceClientConstructor;
+    service: LirestServiceClientConstructor<T>;
     channelOptions?: ChannelOptions;
   }) {
     this.serviceClient = service;

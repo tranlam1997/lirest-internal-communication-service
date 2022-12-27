@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { ChannelCredentials, ChannelOptions, ServiceDefinition } from "@grpc/grpc-js";
-import * as ServiceClient from "../proto";
+import { ChannelCredentials, ChannelOptions, Client, ServiceDefinition } from "@grpc/grpc-js";
 
-export type LirestServiceClient = (ServiceClient.UsersServiceClient | ServiceClient.HealthServiceClient ) & { serviceName: string };
-
-export interface LirestServiceClientConstructor {
-  new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): LirestServiceClient;
+export interface LirestServiceClientConstructor<T extends Client = Client> {
+  new(address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): T & { serviceName: string };
   service: ServiceDefinition;
-  serviceName?: string;
+  serviceName: string;
 }
 
