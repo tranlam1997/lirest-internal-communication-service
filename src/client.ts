@@ -1,13 +1,14 @@
 import { ChannelOptions, credentials } from '@grpc/grpc-js';
 import { LirestServiceClient, LirestServiceClientConstructor } from './interfaces/grpc.interface';
 import { logger } from './common/winston';
+import { ServiceNames } from './enums/grpc.enum';
 
 const ClientLogger = logger('GrpcClient');
 
 export class LirestGrpcClient {
   private client: LirestServiceClient;
   private serviceClient: LirestServiceClientConstructor;
-  private serviceName: string;
+  private serviceName: keyof typeof ServiceNames;
 
   constructor({
     host,
@@ -20,7 +21,7 @@ export class LirestGrpcClient {
   }) {
     this.serviceClient = service;
     this.client = new this.serviceClient(host, credentials.createInsecure(), channelOptions);
-    this.serviceName = this.client.constructor.name;
+    this.serviceName = ServiceNames.find((serviceName) => serviceName === service.serviceName) as keyof typeof ServiceNames;
     ClientLogger.info(`Client running at ${host}`);
   }
 

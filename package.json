@@ -1,6 +1,6 @@
 {
   "name": "@tranlam1997/lirest-internal-communication-service",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tranlam1997/Lirest-Internal-Communication-Service#readme",
   "devDependencies": {
+    "@types/glob": "^8.0.0",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
@@ -34,6 +35,7 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.7.3",
+    "glob": "^8.0.3",
     "long": "^5.2.1",
     "protobufjs": "^7.1.2",
     "winston": "^3.8.2"

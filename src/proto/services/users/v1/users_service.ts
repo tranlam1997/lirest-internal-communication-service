@@ -13,12 +13,6 @@ import {
 } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "services.user.v1";
-
-export interface UserEmail {
-  email: string;
-}
-
 export interface UserEntity {
   id: string;
   firstName: string;
@@ -55,53 +49,6 @@ export interface UpdateUserRequest {
 export interface UpdateUserResponse {
   user: UserEntity | undefined;
 }
-
-function createBaseUserEmail(): UserEmail {
-  return { email: "" };
-}
-
-export const UserEmail = {
-  encode(message: UserEmail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.email !== "") {
-      writer.uint32(10).string(message.email);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): UserEmail {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseUserEmail();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.email = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): UserEmail {
-    return { email: isSet(object.email) ? String(object.email) : "" };
-  },
-
-  toJSON(message: UserEmail): unknown {
-    const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<UserEmail>, I>>(object: I): UserEmail {
-    const message = createBaseUserEmail();
-    message.email = object.email ?? "";
-    return message;
-  },
-};
 
 function createBaseUserEntity(): UserEntity {
   return {
@@ -538,7 +485,7 @@ export const UpdateUserResponse = {
 export type UsersServiceService = typeof UsersServiceService;
 export const UsersServiceService = {
   getUserByEmail: {
-    path: "/services.user.v1.UsersService/GetUserByEmail",
+    path: "/services.users.v1.UsersService/GetUserByEmail",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: GetUserByEmailRequest) => Buffer.from(GetUserByEmailRequest.encode(value).finish()),
@@ -547,7 +494,7 @@ export const UsersServiceService = {
     responseDeserialize: (value: Buffer) => GetUserByEmailResponse.decode(value),
   },
   getUserById: {
-    path: "/services.user.v1.UsersService/GetUserById",
+    path: "/services.users.v1.UsersService/GetUserById",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: GetUserByIdRequest) => Buffer.from(GetUserByIdRequest.encode(value).finish()),
@@ -556,7 +503,7 @@ export const UsersServiceService = {
     responseDeserialize: (value: Buffer) => GetUserByIdResponse.decode(value),
   },
   updateUser: {
-    path: "/services.user.v1.UsersService/UpdateUser",
+    path: "/services.users.v1.UsersService/UpdateUser",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: UpdateUserRequest) => Buffer.from(UpdateUserRequest.encode(value).finish()),
@@ -622,7 +569,7 @@ export interface UsersServiceClient extends Client {
 
 export const UsersServiceClient = makeGenericClientConstructor(
   UsersServiceService,
-  "services.user.v1.UsersService",
+  "services.users.v1.UsersService",
 ) as unknown as {
   new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): UsersServiceClient;
   service: typeof UsersServiceService;
@@ -630,13 +577,13 @@ export const UsersServiceClient = makeGenericClientConstructor(
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
+type DeepPartial<T> = T extends Builtin ? T
   : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
+type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function isSet(value: any): boolean {

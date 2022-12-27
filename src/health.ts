@@ -2,12 +2,12 @@ import { sendUnaryData, ServerUnaryCall, status, UntypedHandleCall } from '@grpc
 import { CheckRequest, CheckResponse, HealthServiceServer, ServingStatus } from './proto/services/health/v1/health_service';
 import { logger } from './common/winston';
 import { LirestServiceError } from './common/error';
+import { ServiceNames } from './enums/grpc.enum';
 
 const HealthLogger = logger('HealthService');
-const healthStatus: Map<string, ServingStatus> = new Map(Object.entries({
-  '': ServingStatus.SERVING,
-  'UsersServiceClient': ServingStatus.SERVING,
-  'HealthServiceClient': ServingStatus.SERVING,
+
+const healthStatus: Map<string, ServingStatus> = new Map(ServiceNames.map((serviceName) => {
+  return [serviceName, ServingStatus.SERVING];
 }));
 
 /**

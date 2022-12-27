@@ -1,15 +1,11 @@
 syntax = "proto3";
 
-package services.user.v1;
+package services.users.v1;
 
 service UsersService {
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {}
   rpc GetUserById(GetUserByIdRequest) returns (GetUserByIdResponse) {}
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
-}
-
-message UserEmail {
-  string email = 1;
 }
 
 message UserEntity {

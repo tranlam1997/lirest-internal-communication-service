@@ -8,3 +8,4 @@ plugins:
       - lowerCaseServiceMethods=true
       - outputServices=grpc-js
       - stringEnums=true
+      - exportCommonSymbols=false
