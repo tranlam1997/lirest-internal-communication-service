@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package services.users.v1;
+package services.user.v1;
 
 service UsersService {
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse) {}
