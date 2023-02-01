@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package services.registry.service_registry.v1;
+
+service ServiceRegistriesService {
+  rpc GetAllServiceRegistries(Empty) returns (GetAllServiceRegistriesResponse) {}
+}
+
+message Empty {}
+
+message ServiceRegistryEntity {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string url = 4;
+  string protocol = 5;
+  string host = 6;
+  int32 port = 7;
+  string base_url = 8;
+  string type = 9;
+  string version = 10;
+  bool status = 11;
+}
+
+message GetAllServiceRegistriesResponse {
+  repeated ServiceRegistryEntity service_registries = 1;
+}

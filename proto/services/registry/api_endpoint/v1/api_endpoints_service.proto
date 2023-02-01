@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package services.registry.api_endpoint.v1;
+
+service ApiEndpointsService {
+  rpc GetAllApiEndpoints (Empty) returns (GetAllApiEndpointsResponse) {}
+}
+
+message Empty {}
+
+message ApiEndpointEntity {
+  string id = 1;
+  string route = 2;
+  string description = 3;
+  string service_name = 4;
+  string method = 5;
+  int32 api_version = 6;
+  bool deprecated = 7;
+}
+
+message GetAllApiEndpointsResponse {
+  repeated ApiEndpointEntity api_endpoints = 1;
+}
