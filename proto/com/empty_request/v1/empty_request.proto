@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package com.empty_request.v1;
+
+message EmptyRequest {}

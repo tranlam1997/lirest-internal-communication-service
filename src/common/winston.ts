@@ -15,7 +15,6 @@ const baseLoggerConfig = {
       handleExceptions: true,
       handleRejections: true,
     }),
-    new winston.transports.File({ filename: 'combined.log' }),
   ],
   exitOnError: false,
 } as winston.LoggerOptions;

@@ -1,12 +1,11 @@
 syntax = "proto3";
 
 package services.registry.api_endpoint.v1;
+import "com/empty_request/v1/empty_request.proto";
 
 service ApiEndpointsService {
-  rpc GetAllApiEndpoints (Empty) returns (GetAllApiEndpointsResponse) {}
+  rpc GetAllApiEndpoints (com.empty_request.v1.EmptyRequest) returns (GetAllApiEndpointsResponse) {}
 }
-
-message Empty {}
 
 message ApiEndpointEntity {
   string id = 1;

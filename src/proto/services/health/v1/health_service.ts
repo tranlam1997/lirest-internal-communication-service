@@ -133,6 +133,10 @@ export const CheckRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<CheckRequest>, I>>(base?: I): CheckRequest {
+    return CheckRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<CheckRequest>, I>>(object: I): CheckRequest {
     const message = createBaseCheckRequest();
     message.service = object.service ?? "";
@@ -178,6 +182,10 @@ export const WatchRequest = {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WatchRequest>, I>>(base?: I): WatchRequest {
+    return WatchRequest.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<WatchRequest>, I>>(object: I): WatchRequest {
@@ -227,6 +235,10 @@ export const CheckResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<CheckResponse>, I>>(base?: I): CheckResponse {
+    return CheckResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<CheckResponse>, I>>(object: I): CheckResponse {
     const message = createBaseCheckResponse();
     message.status = object.status ?? ServingStatus.UNKNOWN;
@@ -272,6 +284,10 @@ export const WatchResponse = {
     const obj: any = {};
     message.status !== undefined && (obj.status = servingStatusToJSON(message.status));
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WatchResponse>, I>>(base?: I): WatchResponse {
+    return WatchResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<WatchResponse>, I>>(object: I): WatchResponse {

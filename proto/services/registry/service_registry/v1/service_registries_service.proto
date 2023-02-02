@@ -1,12 +1,11 @@
 syntax = "proto3";
 
+import "com/empty_request/v1/empty_request.proto";
 package services.registry.service_registry.v1;
 
 service ServiceRegistriesService {
-  rpc GetAllServiceRegistries(Empty) returns (GetAllServiceRegistriesResponse) {}
+  rpc GetAllServiceRegistries(com.empty_request.v1.EmptyRequest) returns (GetAllServiceRegistriesResponse) {}
 }
-
-message Empty {}
 
 message ServiceRegistryEntity {
   string id = 1;

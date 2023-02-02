@@ -166,6 +166,10 @@ export const UserEntity = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<UserEntity>, I>>(base?: I): UserEntity {
+    return UserEntity.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<UserEntity>, I>>(object: I): UserEntity {
     const message = createBaseUserEntity();
     message.id = object.id ?? "";
@@ -221,6 +225,10 @@ export const GetUserByEmailRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<GetUserByEmailRequest>, I>>(base?: I): GetUserByEmailRequest {
+    return GetUserByEmailRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<GetUserByEmailRequest>, I>>(object: I): GetUserByEmailRequest {
     const message = createBaseGetUserByEmailRequest();
     message.email = object.email ?? "";
@@ -266,6 +274,10 @@ export const GetUserByEmailResponse = {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user ? UserEntity.toJSON(message.user) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetUserByEmailResponse>, I>>(base?: I): GetUserByEmailResponse {
+    return GetUserByEmailResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<GetUserByEmailResponse>, I>>(object: I): GetUserByEmailResponse {
@@ -317,6 +329,10 @@ export const GetUserByIdRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<GetUserByIdRequest>, I>>(base?: I): GetUserByIdRequest {
+    return GetUserByIdRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<GetUserByIdRequest>, I>>(object: I): GetUserByIdRequest {
     const message = createBaseGetUserByIdRequest();
     message.id = object.id ?? "";
@@ -362,6 +378,10 @@ export const GetUserByIdResponse = {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user ? UserEntity.toJSON(message.user) : undefined);
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetUserByIdResponse>, I>>(base?: I): GetUserByIdResponse {
+    return GetUserByIdResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<GetUserByIdResponse>, I>>(object: I): GetUserByIdResponse {
@@ -423,6 +443,10 @@ export const UpdateUserRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<UpdateUserRequest>, I>>(base?: I): UpdateUserRequest {
+    return UpdateUserRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<UpdateUserRequest>, I>>(object: I): UpdateUserRequest {
     const message = createBaseUpdateUserRequest();
     message.id = object.id ?? "";
@@ -473,6 +497,10 @@ export const UpdateUserResponse = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<UpdateUserResponse>, I>>(base?: I): UpdateUserResponse {
+    return UpdateUserResponse.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<UpdateUserResponse>, I>>(object: I): UpdateUserResponse {
     const message = createBaseUpdateUserResponse();
     message.user = (object.user !== undefined && object.user !== null)
@@ -485,7 +513,7 @@ export const UpdateUserResponse = {
 export type UsersServiceService = typeof UsersServiceService;
 export const UsersServiceService = {
   getUserByEmail: {
-    path: "/services.users.v1.UsersService/GetUserByEmail",
+    path: "/services.user.v1.UsersService/GetUserByEmail",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: GetUserByEmailRequest) => Buffer.from(GetUserByEmailRequest.encode(value).finish()),
@@ -494,7 +522,7 @@ export const UsersServiceService = {
     responseDeserialize: (value: Buffer) => GetUserByEmailResponse.decode(value),
   },
   getUserById: {
-    path: "/services.users.v1.UsersService/GetUserById",
+    path: "/services.user.v1.UsersService/GetUserById",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: GetUserByIdRequest) => Buffer.from(GetUserByIdRequest.encode(value).finish()),
@@ -503,7 +531,7 @@ export const UsersServiceService = {
     responseDeserialize: (value: Buffer) => GetUserByIdResponse.decode(value),
   },
   updateUser: {
-    path: "/services.users.v1.UsersService/UpdateUser",
+    path: "/services.user.v1.UsersService/UpdateUser",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: UpdateUserRequest) => Buffer.from(UpdateUserRequest.encode(value).finish()),
@@ -569,7 +597,7 @@ export interface UsersServiceClient extends Client {
 
 export const UsersServiceClient = makeGenericClientConstructor(
   UsersServiceService,
-  "services.users.v1.UsersService",
+  "services.user.v1.UsersService",
 ) as unknown as {
   new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): UsersServiceClient;
   service: typeof UsersServiceService;
